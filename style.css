@@ -1,86 +1,82 @@
+/* corpo */
 body{
-font-family:Arial, Helvetica, sans-serif;
-background:#f3f3f3;
-margin:0;
-padding-bottom:120px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f3f3;
+    margin: 0;
+    padding-bottom: 120px;
 }
 
 /* header */
-
 header{
-background:#2e7d32;
-color:white;
-padding:15px;
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
 }
 
 .topBar{
-display:flex;
-justify-content:space-between;
-align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .titulo{
-font-weight:bold;
-font-size:20px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 #btnBusca{
-background:none;
-border:none;
-font-size:20px;
-cursor:pointer;
-color:white;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
 }
 
 /* campo busca */
-
 #campoBusca{
-width:100%;
-padding:8px;
-border:none;
-outline:none;
-font-size:14px;
-display:none;
-margin-top:8px;
-border-radius:5px;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    display: none;
+    margin-top: 8px;
+    border-radius: 5px;
 }
 
 /* setor */
-
 .setor{
-background:white;
-margin:15px;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
+    background: white;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .setorHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-gap:5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    gap: 5px;
 }
 
-/* botões setor */
-
-.setorHeader button{
-background:#2e7d32;
-color:white;
-border:none;
-padding:5px 8px;
-border-radius:5px;
-cursor:pointer;
+/* botões setor (exceto lixeira) */
+.setorHeader button:not(.lixeira){
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 /* lixeira setor */
-
-.lixeira {
-    background: #d9534f; /* botão vermelho */
-    color: white;         /* ícone branco */
+.setorHeader .lixeira {
+    background: #d9534f !important; /* fundo vermelho */
+    color: white;                   /* ícone branco */
     border: none;
     padding: 5px 8px;
     border-radius: 5px;
@@ -89,108 +85,99 @@ cursor:pointer;
 }
 
 /* produto */
-
 .produto{
-display:flex;
-align-items:center;
-gap:6px;
-border-top:1px solid #ddd;
-padding:8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-top: 1px solid #ddd;
+    padding: 8px 0;
 }
 
 .nomeProduto{
-flex:1;
+    flex: 1;
 }
 
 /* input quantidade */
-
 .produto input{
-width:45px;
-padding:4px;
-border:1px solid #ccc;
-border-radius:4px;
+    width: 45px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 /* botões quantidade */
-
 .qtdBtns{
-display:flex;
-gap:3px;
+    display: flex;
+    gap: 3px;
 }
 
 .qtdBtns button{
-background:#eee;
-border:none;
-padding:4px 6px;
-border-radius:4px;
-cursor:pointer;
+    background: #eee;
+    border: none;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* limpar quantidade item */
-
 .limparQtd{
-background:#f0ad4e;
-color:white;
-border:none;
-padding:5px 6px;
-border-radius:4px;
-cursor:pointer;
+    background: #f0ad4e;
+    color: white;
+    border: none;
+    padding: 5px 6px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* excluir produto */
-
 .excluirProduto{
-background:#d9534f;
-color:white;
-border:none;
-padding:5px 6px;
-border-radius:4px;
-cursor:pointer;
-}
+    background: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 6px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 /* botão adicionar produto */
-
 .addProduto{
-margin-top:10px;
-background:#2e7d32;
-color:white;
-border:none;
-padding:6px 10px;
-border-radius:6px;
-cursor:pointer;
+    margin-top: 10px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 /* botão expandir */
-
 .expandir{
-margin-top:5px;
-background:#eee;
-border:none;
-padding:5px;
-border-radius:6px;
-cursor:pointer;
+    margin-top: 5px;
+    background: #eee;
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+    cursor: pointer;
 }
 
 /* barra backup */
-
 .backupBtns{
-position:fixed;
-bottom:10px;
-left:0;
-right:0;
-display:flex;
-justify-content:center;
-gap:10px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
 
 .backupBtns button{
-background:#2e7d32;
-color:white;
-border:none;
-padding:8px 14px;
-border-radius:8px;
-font-size:14px;
-cursor:pointer;
-box-shadow:0 2px 5px rgba(0,0,0,0.2);
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
