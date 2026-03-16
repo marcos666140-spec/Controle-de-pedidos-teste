@@ -26,17 +26,26 @@ localStorage.setItem("pedidos",JSON.stringify(dados))
 function render(){
 
 const container=document.getElementById("setores")
-
 container.innerHTML=""
 
 setores.forEach(setor=>{
 
-let produtos = Object.keys(dados[setor]).filter(p =>
-p.toLowerCase().includes(busca) ||
+let produtos = Object.keys(dados[setor])
+
+/* filtro busca */
+
+if(busca !== ""){
+
+produtos = produtos.filter(produto =>
+produto.toLowerCase().includes(busca) ||
 setor.toLowerCase().includes(busca)
 )
 
-if(produtos.length===0) return
+}
+
+/* se não tiver resultado não mostra setor */
+
+if(produtos.length === 0) return
 
 const box=document.createElement("div")
 box.className="setor"
@@ -242,7 +251,7 @@ container.appendChild(box)
 
 }
 
-/* botão busca */
+/* BUSCA */
 
 const btnBusca = document.getElementById("btnBusca")
 const campoBusca = document.getElementById("campoBusca")
@@ -265,12 +274,12 @@ render()
 
 }
 
-campoBusca.oninput=()=>{
+campoBusca.addEventListener("input",()=>{
 
-busca=campoBusca.value.toLowerCase()
+busca = campoBusca.value.toLowerCase()
 
 render()
 
-}
+})
 
 render()
