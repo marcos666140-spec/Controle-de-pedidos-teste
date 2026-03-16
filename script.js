@@ -304,3 +304,122 @@ reader.readAsText(file)
 }
 
 }
+// --- IMPORTAÇÃO DE PRODUTOS PARA MERCEARIA ---
+function importarProdutos(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const conteudo = e.target.result;
+    let produtosImportados = [];
+
+    try {
+      produtosImportados = JSON.parse(conteudo);
+    } catch (err) {
+      alert("Arquivo inválido!");
+      return;
+    }
+
+    produtosImportados.forEach(prod => {
+      adicionarProdutoNaMercearia(prod.nome, prod.qtd);
+    });
+  };
+  reader.readAsText(file);
+}
+
+// Adiciona produto na aba Mercearia
+function adicionarProdutoNaMercearia(nome, qtd) {
+  const container = document.getElementById("mercearia");
+  if (!container) return;
+
+  const div = document.createElement("div");
+  div.classList.add("produto");
+  div.dataset.setor = "mercearia";
+
+  div.innerHTML = `
+    <span class="nomeProduto">${nome}</span>
+    <input type="number" value="${qtd}" />
+    <div class="qtdBtns">
+      <button class="maisQtd">+</button>
+      <button class="menosQtd">-</button>
+    </div>
+    <button class="lixeira">🗑</button>
+    <button class="mover">Mover</button>
+  `;
+
+  container.appendChild(div);
+  aplicarEventosProduto(div);
+}
+
+// --- BOTÃO MOVER PARA OUTRO SETOR ---
+const setores = ["bebidas", "frios", "mercearia"];
+
+function aplicarEventosProduto(div) {
+  // Eventos quantidade
+  const btnMais = div.querySelector(".maisQtd");
+  const btnMenos = div.querySelector(".menosQtd");
+  const btnLixeira = div.querySelector(".lixeira");
+  const btnMover = div.querySelector(".mover");
+
+  if (btnMais) btnMais.addEventListener("click", () => {
+    const input = div.querySelector("input");
+    input.value = parseInt(input.value) + 1;
+  });
+
+  if (btnMenos) btnMenos.addEventListener("click", () => {
+    const input = div.querySelector("input");
+    if (parseInt(input.value) > 0) input.value = parseInt(input.value) - 1;
+  });
+
+  if (btnLixeira) btnLixeira.addEventListener("click", () => {
+    div.remove();
+  });
+
+  // Evento botão mover
+  if (btnMover) btnMover.addEventListener("click", (e) => {
+    // Remove menu anterior se existir
+    document.querySelectorAll(".menuMover").forEach(m => m.remove());
+
+    const menu = document.createElement("div");
+    menu.classList.add("menuMover");
+
+    setores.forEach(setor => {
+      const item = document.createElement("div");
+      item.textContent = setor.charAt(0).toUpperCase() + setor.slice(1);
+      item.addEventListener("click", () => {
+        moverProdutoParaSetor(div, setor);
+        menu.remove();
+      });
+      menu.appendChild(item);
+    });
+
+    document.body.appendChild(menu);
+    const rect = e.target.getBoundingClientRect();
+    menu.style.left = rect.left + "px";
+    menu.style.top = rect.bottom + "px";
+
+    const fechar = ev => {
+      if (!menu.contains(ev.target)) {
+        menu.remove();
+        document.removeEventListener("click", fechar);
+      }
+    };
+    document.addEventListener("click", fechar);
+  });
+}
+
+// Função que move o produto para outro setor
+function moverProdutoParaSetor(produtoDiv, novoSetor) {
+  const setorContainer = document.getElementById(novoSetor);
+  if (!setorContainer) return;
+
+  produtoDiv.dataset.setor = novoSetor;
+  setorContainer.appendChild(produtoDiv);
+}
+
+// --- EVENTO INPUT PARA IMPORTAR ---
+const inputArquivo = document.getElementById("arquivoProdutos");
+if (inputArquivo) {
+  inputArquivo.addEventListener("change", importarProdutos);
+}
