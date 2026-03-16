@@ -38,8 +38,6 @@ header.className="setorHeader"
 const titulo=document.createElement("span")
 titulo.innerText=setor
 
-/* limpar setor */
-
 const limparSetor=document.createElement("button")
 limparSetor.innerText="🗑"
 limparSetor.className="lixeira"
@@ -54,8 +52,6 @@ salvar()
 render()
 
 }
-
-/* finalizar setor */
 
 const finalizar=document.createElement("button")
 finalizar.innerText="✅"
@@ -75,10 +71,8 @@ texto+=dados[setor][produto]+" "+produto+"\n"
 }
 
 if(texto.trim()===setor){
-
 alert("Nenhum item nesse setor")
 return
-
 }
 
 navigator.clipboard.writeText(texto).then(()=>{
@@ -93,8 +87,6 @@ header.appendChild(finalizar)
 
 box.appendChild(header)
 
-/* produtos */
-
 let produtos = Object.keys(dados[setor])
 
 let limite = expandidos[setor] ? produtos.length : 5
@@ -105,6 +97,7 @@ const linha=document.createElement("div")
 linha.className="produto"
 
 const nome=document.createElement("span")
+nome.className="nomeProduto"
 nome.innerText=produto
 
 const input=document.createElement("input")
@@ -116,15 +109,13 @@ dados[setor][produto]=input.value
 salvar()
 }
 
-/* botões quantidade */
-
 const botoes=document.createElement("div")
 botoes.className="qtdBtns"
 
-;[1,2,5,10,20].forEach(valor=>{
+;[1,5,10].forEach(valor=>{
 
 const b=document.createElement("button")
-b.innerText=valor
+b.innerText="+"+valor
 
 b.onclick=()=>{
 
@@ -142,10 +133,9 @@ botoes.appendChild(b)
 
 })
 
-/* limpar quantidade */
-
 const limparItem=document.createElement("button")
 limparItem.innerText="🧹"
+limparItem.className="limparQtd"
 
 limparItem.onclick=()=>{
 
@@ -155,10 +145,9 @@ salvar()
 
 }
 
-/* excluir produto */
-
 const excluirItem=document.createElement("button")
 excluirItem.innerText="❌"
+excluirItem.className="excluirProduto"
 
 excluirItem.onclick=()=>{
 
@@ -183,8 +172,6 @@ box.appendChild(linha)
 
 })
 
-/* botão expandir */
-
 if(produtos.length > 5){
 
 const expandir=document.createElement("button")
@@ -204,8 +191,6 @@ render()
 box.appendChild(expandir)
 
 }
-
-/* adicionar produto */
 
 const add=document.createElement("button")
 
