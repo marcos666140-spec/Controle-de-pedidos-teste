@@ -87,13 +87,20 @@ border-radius:4px;
 cursor:pointer;
 }
 
+/* BOTÃO EXCLUIR ATUALIZADO */
+
 .excluirProduto{
-background:#d9534f;
-color:white;
+background:#d6ecff;
+color:red;
 border:none;
 padding:4px 6px;
 border-radius:4px;
 cursor:pointer;
+font-weight:bold;
+}
+
+.excluirProduto:hover{
+background:#bfe2ff;
 }
 
 .addProduto{
