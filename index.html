@@ -9,6 +9,7 @@
 <title>Pedidos</title>
 
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 
 <meta name="theme-color" content="#2e7d32">
 
@@ -17,36 +18,27 @@
 <body>
 
 <header>
-
-<div class="topBar">
-
-<span class="titulo">Pedidos</span>
-
-<button id="btnBusca">🔍</button>
-
-</div>
-
-<input type="text" id="campoBusca" placeholder="Buscar produto ou setor">
-
+Pedidos
 </header>
 
 <div id="setores"></div>
 
+<div class="backupBtns">
 
-<!-- barra backup -->
+<button id="exportarBtn">📤 Exportar</button>
+<button id="importarBtn">📥 Importar</button>
 
-<div id="backupBar">
-
-<button id="exportarDados">📤 Exportar</button>
-
-<button id="importarDados">📥 Importar</button>
-
-<input type="file" id="arquivoImportar" accept=".json" style="display:none">
+<input type="file" id="importarArquivo" accept=".json" hidden>
 
 </div>
 
-
 <script src="script.js"></script>
+
+<script>
+if("serviceWorker" in navigator){
+navigator.serviceWorker.register("service-worker.js")
+}
+</script>
 
 </body>
 </html>
