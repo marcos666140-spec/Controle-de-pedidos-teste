@@ -6,7 +6,7 @@ const setores = [
 "Panificação"
 ]
 
-let dados = JSON.parse(localStorage.getItem("pedidos")) || {}
+let dados = JSON.parse(localStorage.getItem("pedidos_teste")) || {}
 
 /* MIGRAR SETOR ANTIGO AUTOMATICAMENTE */
 
@@ -87,11 +87,11 @@ dados["Mercearia"][produto] = lista[produto]
 
 }
 
-/* remove setor antigo */
+/* remover setor antigo */
 
 delete dados["Bebidas / Frios / Mercearia"]
 
-localStorage.setItem("pedidos",JSON.stringify(dados))
+localStorage.setItem("pedidos_teste",JSON.stringify(dados))
 
 }
 
@@ -104,7 +104,7 @@ dados[setor]={}
 })
 
 function salvar(){
-localStorage.setItem("pedidos",JSON.stringify(dados))
+localStorage.setItem("pedidos_teste",JSON.stringify(dados))
 }
 
 function render(){
@@ -198,7 +198,6 @@ input.value=dados[setor][produto] || ""
 input.oninput=()=>{
 
 dados[setor][produto]=input.value
-
 salvar()
 
 }
@@ -239,9 +238,7 @@ limparItem.className="limparQtd"
 limparItem.onclick=()=>{
 
 input.value=""
-
 dados[setor][produto]=""
-
 salvar()
 
 }
@@ -257,9 +254,7 @@ excluirItem.onclick=()=>{
 if(confirm("Excluir produto?")){
 
 delete dados[setor][produto]
-
 salvar()
-
 render()
 
 }
@@ -293,7 +288,6 @@ if(!nome) return
 dados[setor][nome]=""
 
 salvar()
-
 render()
 
 }
