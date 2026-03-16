@@ -2,57 +2,51 @@
 <html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Pedidos</title>
 
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 
 <meta name="theme-color" content="#2e7d32">
+
 </head>
 
 <body>
 
 <header>
-  <div class="topBar">
-    <span class="titulo">Pedidos</span>
-    <button id="btnBusca">🔎</button>
-  </div>
 
-  <input type="text" id="campoBusca" placeholder="Buscar produto...">
-</header>
+<div class="topBar">
 
-<!-- Setores individuais -->
-<div id="setores">
-  <div id="bebidas" class="setorContainer"></div>
-  <div id="frios" class="setorContainer"></div>
-  <div id="mercearia" class="setorContainer"></div>
+<span class="titulo">Pedidos</span>
+
+<button id="btnBusca">🔎</button>
+
 </div>
 
-<div class="backupBtns">
-  <button id="exportarBtn">📤 Exportar</button>
-  <button id="importarBtn">📥 Importar</button>
+<input type="text" id="campoBusca" placeholder="Buscar produto...">
 
-  <!-- Input escondido para importar JSON -->
-  <input type="file" id="arquivoProdutos" accept=".json" hidden>
+</header>
+
+<div id="setores"></div>
+
+<div class="backupBtns">
+
+<button id="exportarBtn">📤 Exportar</button>
+<button id="importarBtn">📥 Importar</button>
+
+<input type="file" id="importarArquivo" accept=".json" hidden>
+
 </div>
 
 <script src="script.js"></script>
 
-<!-- Registro atualizado do Service Worker -->
 <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("service-worker.js");
-  });
-}
-
-// Conecta o botão de importar ao input escondido
-const btnImportar = document.getElementById("importarBtn");
-const inputArquivo = document.getElementById("arquivoProdutos");
-if (btnImportar && inputArquivo) {
-  btnImportar.addEventListener("click", () => inputArquivo.click());
+if("serviceWorker" in navigator){
+navigator.serviceWorker.register("service-worker.js")
 }
 </script>
 
