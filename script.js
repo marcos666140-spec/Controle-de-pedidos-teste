@@ -1,15 +1,20 @@
 const setores = [
-"Bebidas / Frios / Mercearia",
+"Bebidas",
+"Frios",
+"Mercearia",
 "Confeitaria",
 "Panificação"
 ]
 
 let dados = JSON.parse(localStorage.getItem("pedidos")) || {}
 
+let expandidos = {}
+
 setores.forEach(setor=>{
 if(!dados[setor]){
 dados[setor]={}
 }
+expandidos[setor]=false
 })
 
 function salvar(){
@@ -54,7 +59,6 @@ render()
 
 const finalizar=document.createElement("button")
 finalizar.innerText="✅"
-finalizar.title="Finalizar setor"
 
 finalizar.onclick=()=>{
 
@@ -64,7 +68,7 @@ for(let produto in dados[setor]){
 
 if(dados[setor][produto] > 0){
 
-texto+=produto+" - "+dados[setor][produto]+"\n"
+texto+=dados[setor][produto]+" "+produto+"\n"
 
 }
 
@@ -73,14 +77,13 @@ texto+=produto+" - "+dados[setor][produto]+"\n"
 if(texto.trim()===setor){
 
 alert("Nenhum item nesse setor")
-
 return
 
 }
 
-navigator.clipboard.writeText(texto)
-
+navigator.clipboard.writeText(texto).then(()=>{
 alert("Pedido copiado:\n\n"+texto)
+})
 
 }
 
@@ -92,7 +95,11 @@ box.appendChild(header)
 
 /* produtos */
 
-for(let produto in dados[setor]){
+let produtos = Object.keys(dados[setor])
+
+let limite = expandidos[setor] ? produtos.length : 5
+
+produtos.slice(0,limite).forEach(produto=>{
 
 const linha=document.createElement("div")
 linha.className="produto"
@@ -105,11 +112,8 @@ input.type="number"
 input.value=dados[setor][produto] || ""
 
 input.oninput=()=>{
-
 dados[setor][produto]=input.value
-
 salvar()
-
 }
 
 /* botões quantidade */
@@ -120,7 +124,6 @@ botoes.className="qtdBtns"
 ;[1,2,5,10,20].forEach(valor=>{
 
 const b=document.createElement("button")
-
 b.innerText=valor
 
 b.onclick=()=>{
@@ -143,14 +146,11 @@ botoes.appendChild(b)
 
 const limparItem=document.createElement("button")
 limparItem.innerText="🧹"
-limparItem.className="limparQtd"
 
 limparItem.onclick=()=>{
 
 input.value=""
-
 dados[setor][produto]=""
-
 salvar()
 
 }
@@ -159,7 +159,6 @@ salvar()
 
 const excluirItem=document.createElement("button")
 excluirItem.innerText="❌"
-excluirItem.className="excluirProduto"
 
 excluirItem.onclick=()=>{
 
@@ -168,7 +167,6 @@ if(confirm("Excluir produto?")){
 delete dados[setor][produto]
 
 salvar()
-
 render()
 
 }
@@ -183,6 +181,28 @@ linha.appendChild(excluirItem)
 
 box.appendChild(linha)
 
+})
+
+/* botão expandir */
+
+if(produtos.length > 5){
+
+const expandir=document.createElement("button")
+
+expandir.className="expandir"
+
+expandir.innerText = expandidos[setor] ? "⬆ Mostrar menos" : "⬇ Mostrar mais"
+
+expandir.onclick=()=>{
+
+expandidos[setor] = !expandidos[setor]
+
+render()
+
+}
+
+box.appendChild(expandir)
+
 }
 
 /* adicionar produto */
@@ -190,7 +210,6 @@ box.appendChild(linha)
 const add=document.createElement("button")
 
 add.innerText="+ Produto"
-
 add.className="addProduto"
 
 add.onclick=()=>{
@@ -202,7 +221,6 @@ if(!nome) return
 dados[setor][nome]=""
 
 salvar()
-
 render()
 
 }
