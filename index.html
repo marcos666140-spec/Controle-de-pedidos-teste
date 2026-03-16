@@ -2,53 +2,51 @@
 <html lang="pt-br">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedidos</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Pedidos</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-
-<meta name="theme-color" content="#2e7d32">
-
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2e7d32">
 </head>
 
 <body>
 
-<header>
+  <header>
+    <div class="topBar">
+      <span class="titulo">Pedidos</span>
+      <button id="btnBusca">🔎</button>
+    </div>
+    <input type="text" id="campoBusca" placeholder="Buscar produto...">
+  </header>
 
-<div class="topBar">
+  <!-- Containers para cada setor -->
+  <div id="setores">
 
-<span class="titulo">Pedidos</span>
+    <div id="Bebidas" class="setorContainer"></div>
+    <div id="Frios" class="setorContainer"></div>
+    <div id="Mercearia" class="setorContainer"></div>
+    <div id="Panificação" class="setorContainer"></div>
+    <div id="Confeitaria" class="setorContainer"></div>
 
-<button id="btnBusca">🔎</button>
+  </div>
 
-</div>
+  <!-- Botões de backup/export/import -->
+  <div class="backupBtns">
+    <button id="exportarBtn">📤 Exportar</button>
+    <button id="importarBtn">📥 Importar</button>
+    <input type="file" id="importarArquivo" accept=".json" hidden>
+  </div>
 
-<input type="text" id="campoBusca" placeholder="Buscar produto...">
+  <script src="script.js"></script>
 
-</header>
-
-<div id="setores"></div>
-
-<div class="backupBtns">
-
-<button id="exportarBtn">📤 Exportar</button>
-<button id="importarBtn">📥 Importar</button>
-
-<input type="file" id="importarArquivo" accept=".json" hidden>
-
-</div>
-
-<script src="script.js"></script>
-
-<script>
-if("serviceWorker" in navigator){
-navigator.serviceWorker.register("service-worker.js")
-}
-</script>
+  <script>
+    // Service worker
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+    }
+  </script>
 
 </body>
 </html>
