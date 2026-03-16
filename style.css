@@ -2,133 +2,14 @@ body{
 font-family:Arial, Helvetica, sans-serif;
 background:#f3f3f3;
 margin:0;
-padding-bottom:80px;
+padding-bottom:120px;
 }
 
 header{
 background:#2e7d32;
 color:white;
 padding:15px;
-text-align:center;
-font-size:20px;
 }
-
-.setor{
-background:white;
-margin:15px;
-padding:15px;
-border-radius:10px;
-box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-.setorHeader{
-display:flex;
-justify-content:space-between;
-align-items:center;
-font-size:18px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.lixeira{
-background:#d9534f;
-color:white;
-border:none;
-padding:5px 8px;
-border-radius:5px;
-cursor:pointer;
-}
-
-.produto{
-display:flex;
-align-items:center;
-border-top:1px solid #ddd;
-padding:8px 0;
-gap:6px;
-}
-
-.nomeProduto{
-flex:1;
-min-width:120px;
-}
-
-.produto input{
-width:40px;
-padding:3px;
-border:1px solid #ccc;
-border-radius:4px;
-text-align:center;
-}
-
-.qtdBtns{
-display:flex;
-gap:3px;
-}
-
-.qtdBtns button{
-background:#eee;
-border:none;
-padding:3px 5px;
-border-radius:4px;
-cursor:pointer;
-font-size:12px;
-}
-
-.qtdBtns button:hover{
-background:#ddd;
-}
-
-.limparQtd{
-background:#f0ad4e;
-color:white;
-border:none;
-padding:4px 6px;
-border-radius:4px;
-cursor:pointer;
-}
-
-/* BOTÃO EXCLUIR ATUALIZADO */
-
-.excluirProduto{
-background:#d6ecff;
-color:#ff0000;
-border:none;
-padding:4px 6px;
-border-radius:4px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.excluirProduto:hover{
-background:#bfe2ff;
-}
-}
-
-.excluirProduto:hover{
-background:#bfe2ff;
-}
-
-.addProduto{
-margin-top:10px;
-background:#2e7d32;
-color:white;
-border:none;
-padding:6px 10px;
-border-radius:6px;
-cursor:pointer;
-}
-
-.expandir{
-margin-top:8px;
-background:#2196f3;
-color:white;
-border:none;
-padding:6px 10px;
-border-radius:6px;
-cursor:pointer;
-width:100%;
-}
-/* barra superior */
 
 .topBar{
 display:flex;
@@ -149,8 +30,6 @@ cursor:pointer;
 color:white;
 }
 
-/* campo de busca */
-
 #campoBusca{
 width:100%;
 padding:8px;
@@ -160,4 +39,140 @@ font-size:14px;
 display:none;
 margin-top:8px;
 border-radius:5px;
+}
+
+/* setor */
+
+.setor{
+background:white;
+margin:15px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.setorHeader{
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-size:18px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+/* botões */
+
+.lixeira{
+background:#d9534f;
+color:white;
+border:none;
+padding:5px 8px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* produto */
+
+.produto{
+display:flex;
+align-items:center;
+gap:6px;
+border-top:1px solid #ddd;
+padding:8px 0;
+}
+
+.nomeProduto{
+flex:1;
+}
+
+/* input */
+
+.produto input{
+width:45px;
+padding:4px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+/* botões quantidade */
+
+.qtdBtns{
+display:flex;
+gap:3px;
+}
+
+.qtdBtns button{
+background:#eee;
+border:none;
+padding:4px 6px;
+border-radius:4px;
+cursor:pointer;
+}
+
+/* limpar quantidade */
+
+.limparQtd{
+background:#f0ad4e;
+color:white;
+border:none;
+padding:5px 6px;
+border-radius:4px;
+cursor:pointer;
+}
+
+/* excluir produto */
+
+.excluirProduto{
+background:#d6ecff;
+color:red;
+border:none;
+padding:5px 6px;
+border-radius:4px;
+cursor:pointer;
+}
+
+/* adicionar */
+
+.addProduto{
+margin-top:10px;
+background:#2e7d32;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* expandir */
+
+.expandir{
+margin-top:5px;
+background:#eee;
+border:none;
+padding:5px;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* backup */
+
+#backupBar{
+position:fixed;
+bottom:10px;
+left:0;
+right:0;
+display:flex;
+justify-content:center;
+gap:10px;
+}
+
+#backupBar button{
+background:#2e7d32;
+color:white;
+border:none;
+padding:8px 14px;
+border-radius:8px;
+font-size:14px;
+cursor:pointer;
+box-shadow:0 2px 5px rgba(0,0,0,0.2);
 }
