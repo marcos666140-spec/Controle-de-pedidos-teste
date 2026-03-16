@@ -5,6 +5,8 @@ margin:0;
 padding-bottom:120px;
 }
 
+/* header */
+
 header{
 background:#2e7d32;
 color:white;
@@ -29,6 +31,8 @@ font-size:20px;
 cursor:pointer;
 color:white;
 }
+
+/* campo busca */
 
 #campoBusca{
 width:100%;
@@ -58,9 +62,21 @@ align-items:center;
 font-size:18px;
 font-weight:bold;
 margin-bottom:10px;
+gap:5px;
 }
 
-/* botões */
+/* botões setor */
+
+.setorHeader button{
+background:#2e7d32;
+color:white;
+border:none;
+padding:5px 8px;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* lixeira setor */
 
 .lixeira{
 background:#d9534f;
@@ -85,7 +101,7 @@ padding:8px 0;
 flex:1;
 }
 
-/* input */
+/* input quantidade */
 
 .produto input{
 width:45px;
@@ -109,7 +125,7 @@ border-radius:4px;
 cursor:pointer;
 }
 
-/* limpar quantidade */
+/* limpar quantidade item */
 
 .limparQtd{
 background:#f0ad4e;
@@ -131,7 +147,7 @@ border-radius:4px;
 cursor:pointer;
 }
 
-/* adicionar */
+/* botão adicionar produto */
 
 .addProduto{
 margin-top:10px;
@@ -143,7 +159,7 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* expandir */
+/* botão expandir */
 
 .expandir{
 margin-top:5px;
@@ -154,9 +170,9 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* backup */
+/* barra backup */
 
-#backupBar{
+.backupBtns{
 position:fixed;
 bottom:10px;
 left:0;
@@ -166,7 +182,7 @@ justify-content:center;
 gap:10px;
 }
 
-#backupBar button{
+.backupBtns button{
 background:#2e7d32;
 color:white;
 border:none;
