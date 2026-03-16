@@ -128,3 +128,36 @@ border-radius:6px;
 cursor:pointer;
 width:100%;
 }
+/* barra superior */
+
+.topBar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.titulo{
+font-weight:bold;
+font-size:20px;
+}
+
+#btnBusca{
+background:none;
+border:none;
+font-size:20px;
+cursor:pointer;
+color:white;
+}
+
+/* campo de busca */
+
+#campoBusca{
+width:100%;
+padding:8px;
+border:none;
+outline:none;
+font-size:14px;
+display:none;
+margin-top:8px;
+border-radius:5px;
+}
