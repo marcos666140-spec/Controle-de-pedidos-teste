@@ -139,12 +139,13 @@ cursor:pointer;
 /* excluir produto */
 
 .excluirProduto{
-background:#d6ecff;
-color:red;
+background:#d9534f;
+color:white;
 border:none;
 padding:5px 6px;
 border-radius:4px;
 cursor:pointer;
+}
 }
 
 /* botão adicionar produto */
