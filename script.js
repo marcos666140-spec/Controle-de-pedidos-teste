@@ -6,15 +6,13 @@ const setores = [
 "Panificação"
 ]
 
+setores.sort((a,b)=>a.localeCompare(b,"pt-BR"))
+
 let dados = JSON.parse(localStorage.getItem("pedidos")) || {}
 
 let expandidos = {}
 
-let busca = ""
-
-/* ordem alfabética setores */
-
-setores.sort((a,b)=>a.localeCompare(b,"pt-BR"))
+let busca=""
 
 setores.forEach(setor=>{
 if(!dados[setor]){
@@ -34,23 +32,15 @@ container.innerHTML=""
 
 setores.forEach(setor=>{
 
-/* ordem alfabética produtos */
-
 let produtos = Object.keys(dados[setor])
 .sort((a,b)=>a.localeCompare(b,"pt-BR"))
 
-/* filtro busca */
-
-if(busca !== ""){
-
-produtos = produtos.filter(produto =>
-produto.toLowerCase().includes(busca) ||
+if(busca!==""){
+produtos=produtos.filter(p=>
+p.toLowerCase().includes(busca)||
 setor.toLowerCase().includes(busca)
 )
-
 }
-
-/* cria setor */
 
 const box=document.createElement("div")
 box.className="setor"
@@ -61,24 +51,17 @@ header.className="setorHeader"
 const titulo=document.createElement("span")
 titulo.innerText=setor
 
-/* limpar setor */
-
 const limparSetor=document.createElement("button")
 limparSetor.innerText="🗑"
 limparSetor.className="lixeira"
 
 limparSetor.onclick=()=>{
-
-for(let produto in dados[setor]){
-dados[setor][produto]=""
+for(let p in dados[setor]){
+dados[setor][p]=""
 }
-
 salvar()
 render()
-
 }
-
-/* finalizar setor */
 
 const finalizar=document.createElement("button")
 finalizar.innerText="✅"
@@ -89,20 +72,11 @@ let texto=setor+"\n\n"
 
 Object.keys(dados[setor])
 .sort((a,b)=>a.localeCompare(b,"pt-BR"))
-.forEach(produto=>{
-
-if(dados[setor][produto] > 0){
-
-texto+=dados[setor][produto]+" "+produto+"\n"
-
+.forEach(p=>{
+if(dados[setor][p]>0){
+texto+=dados[setor][p]+" "+p+"\n"
 }
-
 })
-
-if(texto.trim()===setor){
-alert("Nenhum item nesse setor")
-return
-}
 
 navigator.clipboard.writeText(texto)
 
@@ -116,9 +90,7 @@ header.appendChild(finalizar)
 
 box.appendChild(header)
 
-/* limite itens */
-
-let limite = expandidos[setor] ? produtos.length : 5
+let limite=expandidos[setor]?produtos.length:5
 
 produtos.slice(0,limite).forEach(produto=>{
 
@@ -131,109 +103,81 @@ nome.innerText=produto
 
 const input=document.createElement("input")
 input.type="number"
-input.value=dados[setor][produto] || ""
+input.value=dados[setor][produto]||""
 
 input.oninput=()=>{
 dados[setor][produto]=input.value
 salvar()
 }
 
-/* botões quantidade */
-
 const botoes=document.createElement("div")
 botoes.className="qtdBtns"
 
-;[1,5,10].forEach(valor=>{
+;[1,5,10].forEach(v=>{
 
 const b=document.createElement("button")
-b.innerText="+"+valor
+b.innerText="+"+v
 
 b.onclick=()=>{
-
 let atual=parseInt(input.value)||0
-
-input.value=atual+valor
-
+input.value=atual+v
 dados[setor][produto]=input.value
-
 salvar()
-
 }
 
 botoes.appendChild(b)
 
 })
 
-/* limpar item */
+const limpar=document.createElement("button")
+limpar.innerText="🧹"
+limpar.className="limparQtd"
 
-const limparItem=document.createElement("button")
-limparItem.innerText="🧹"
-limparItem.className="limparQtd"
-
-limparItem.onclick=()=>{
-
+limpar.onclick=()=>{
 input.value=""
 dados[setor][produto]=""
-
 salvar()
-
 }
 
-/* excluir produto */
+const excluir=document.createElement("button")
+excluir.innerText="❌"
+excluir.className="excluirProduto"
 
-const excluirItem=document.createElement("button")
-excluirItem.innerText="❌"
-excluirItem.className="excluirProduto"
-
-excluirItem.onclick=()=>{
-
+excluir.onclick=()=>{
 if(confirm("Excluir produto?")){
-
 delete dados[setor][produto]
-
 salvar()
 render()
-
 }
-
 }
 
 linha.appendChild(nome)
 linha.appendChild(input)
 linha.appendChild(botoes)
-linha.appendChild(limparItem)
-linha.appendChild(excluirItem)
+linha.appendChild(limpar)
+linha.appendChild(excluir)
 
 box.appendChild(linha)
 
 })
 
-/* botão expandir */
-
-if(produtos.length > 5){
+if(produtos.length>5){
 
 const expandir=document.createElement("button")
-
 expandir.className="expandir"
 
-expandir.innerText = expandidos[setor] ? "⬆ Mostrar menos" : "⬇ Mostrar mais"
+expandir.innerText=expandidos[setor]?"⬆ Mostrar menos":"⬇ Mostrar mais"
 
 expandir.onclick=()=>{
-
-expandidos[setor] = !expandidos[setor]
-
+expandidos[setor]=!expandidos[setor]
 render()
-
 }
 
 box.appendChild(expandir)
 
 }
 
-/* adicionar produto */
-
 const add=document.createElement("button")
-
 add.innerText="+ Produto"
 add.className="addProduto"
 
@@ -258,35 +202,78 @@ container.appendChild(box)
 
 }
 
-/* BUSCA */
+/* busca */
 
-const btnBusca = document.getElementById("btnBusca")
-const campoBusca = document.getElementById("campoBusca")
+const btnBusca=document.getElementById("btnBusca")
+const campoBusca=document.getElementById("campoBusca")
 
-btnBusca.onclick = ()=>{
+btnBusca.onclick=()=>{
 
-if(campoBusca.style.display==="none" || campoBusca.style.display===""){
-
+if(campoBusca.style.display==="none"||campoBusca.style.display===""){
 campoBusca.style.display="block"
 campoBusca.focus()
-
 }else{
-
 campoBusca.style.display="none"
 campoBusca.value=""
 busca=""
 render()
-
 }
 
 }
 
-campoBusca.addEventListener("input",()=>{
-
-busca = campoBusca.value.toLowerCase()
-
+campoBusca.oninput=()=>{
+busca=campoBusca.value.toLowerCase()
 render()
+}
 
-})
+/* exportar */
+
+document.getElementById("exportarDados").onclick=()=>{
+
+const dadosBackup=localStorage.getItem("pedidos")
+
+const blob=new Blob([dadosBackup],{type:"application/json"})
+
+const url=URL.createObjectURL(blob)
+
+const a=document.createElement("a")
+
+a.href=url
+a.download="produtos-backup.json"
+
+a.click()
+
+URL.revokeObjectURL(url)
+
+}
+
+/* importar */
+
+const importarBtn=document.getElementById("importarDados")
+const arquivoInput=document.getElementById("arquivoImportar")
+
+importarBtn.onclick=()=>{
+arquivoInput.click()
+}
+
+arquivoInput.onchange=(e)=>{
+
+const file=e.target.files[0]
+
+if(!file) return
+
+const reader=new FileReader()
+
+reader.onload=function(event){
+
+localStorage.setItem("pedidos",event.target.result)
+
+location.reload()
+
+}
+
+reader.readAsText(file)
+
+}
 
 render()
