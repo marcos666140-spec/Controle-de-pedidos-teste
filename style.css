@@ -32,6 +32,7 @@ align-items:center;
 font-size:18px;
 font-weight:bold;
 margin-bottom:10px;
+gap:8px;
 }
 
 /* botão limpar setor */
@@ -53,6 +54,7 @@ align-items:center;
 border-top:1px solid #ddd;
 padding:8px 0;
 gap:6px;
+flex-wrap:wrap;
 }
 
 /* nome produto */
@@ -75,6 +77,7 @@ border-radius:4px;
 .qtdBtns{
 display:flex;
 gap:3px;
+flex-wrap:wrap;
 }
 
 .qtdBtns button{
@@ -123,7 +126,20 @@ border-radius:6px;
 cursor:pointer;
 }
 
-/* botão finalizar */
+/* botão expandir setor */
+
+.expandir{
+margin-top:8px;
+background:#2196f3;
+color:white;
+border:none;
+padding:6px 10px;
+border-radius:6px;
+cursor:pointer;
+width:100%;
+}
+
+/* botão finalizar flutuante */
 
 #finalizarBtn{
 position:fixed;
