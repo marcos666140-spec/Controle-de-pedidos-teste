@@ -12,7 +12,9 @@ let expandidos = {}
 
 let busca = ""
 
-/* garante que todos setores existam */
+/* ordem alfabética setores */
+
+setores.sort((a,b)=>a.localeCompare(b,"pt-BR"))
 
 setores.forEach(setor=>{
 if(!dados[setor]){
@@ -28,12 +30,14 @@ localStorage.setItem("pedidos",JSON.stringify(dados))
 function render(){
 
 const container=document.getElementById("setores")
-
 container.innerHTML=""
 
 setores.forEach(setor=>{
 
+/* ordem alfabética produtos */
+
 let produtos = Object.keys(dados[setor])
+.sort((a,b)=>a.localeCompare(b,"pt-BR"))
 
 /* filtro busca */
 
@@ -83,7 +87,9 @@ finalizar.onclick=()=>{
 
 let texto=setor+"\n\n"
 
-for(let produto in dados[setor]){
+Object.keys(dados[setor])
+.sort((a,b)=>a.localeCompare(b,"pt-BR"))
+.forEach(produto=>{
 
 if(dados[setor][produto] > 0){
 
@@ -91,7 +97,7 @@ texto+=dados[setor][produto]+" "+produto+"\n"
 
 }
 
-}
+})
 
 if(texto.trim()===setor){
 alert("Nenhum item nesse setor")
