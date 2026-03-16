@@ -8,7 +8,7 @@ const setores = [
 
 let dados = JSON.parse(localStorage.getItem("pedidos_teste")) || {}
 
-/* MIGRAR SETOR ANTIGO AUTOMATICAMENTE */
+/* MIGRAR SETOR ANTIGO */
 
 if(dados["Bebidas / Frios / Mercearia"]){
 
@@ -22,39 +22,19 @@ for(let produto in lista){
 
 const nome = produto.toLowerCase()
 
-/* BEBIDAS */
-
 if(
 nome.includes("coca") ||
 nome.includes("pepsi") ||
 nome.includes("fanta") ||
 nome.includes("guarana") ||
-nome.includes("dolly") ||
-nome.includes("tubaina") ||
 nome.includes("refrigerante") ||
 nome.includes("suco") ||
 nome.includes("del valle") ||
-nome.includes("maguary") ||
-nome.includes("natural one") ||
 nome.includes("agua") ||
-nome.includes("água") ||
-nome.includes("h2o") ||
-nome.includes("gatorade") ||
-nome.includes("powerade") ||
-nome.includes("chá") ||
-nome.includes("cha") ||
-nome.includes("mate") ||
-nome.includes("toddy") ||
-nome.includes("nescau") ||
-nome.includes("leite") ||
-nome.includes("achocolatado")
+nome.includes("água")
 ){
-
 dados["Bebidas"][produto] = lista[produto]
-
 }
-
-/* FRIOS */
 
 else if(
 nome.includes("presunto") ||
@@ -62,32 +42,16 @@ nome.includes("mussarela") ||
 nome.includes("muçarela") ||
 nome.includes("queijo") ||
 nome.includes("mortadela") ||
-nome.includes("calabresa") ||
-nome.includes("peito de peru") ||
-nome.includes("salame") ||
-nome.includes("blanquet") ||
-nome.includes("bacon") ||
-nome.includes("salsicha") ||
-nome.includes("linguiça") ||
-nome.includes("linguica") ||
-nome.includes("lombo")
+nome.includes("calabresa")
 ){
-
 dados["Frios"][produto] = lista[produto]
-
 }
-
-/* MERCEARIA */
 
 else{
-
 dados["Mercearia"][produto] = lista[produto]
-
 }
 
 }
-
-/* remover setor antigo */
 
 delete dados["Bebidas / Frios / Mercearia"]
 
@@ -106,6 +70,8 @@ dados[setor]={}
 function salvar(){
 localStorage.setItem("pedidos_teste",JSON.stringify(dados))
 }
+
+/* RENDER */
 
 function render(){
 
@@ -128,7 +94,6 @@ titulo.innerText=setor
 
 const limparSetor=document.createElement("button")
 limparSetor.innerText="🗑"
-limparSetor.className="lixeira"
 
 limparSetor.onclick=()=>{
 
@@ -145,7 +110,6 @@ render()
 
 const finalizar=document.createElement("button")
 finalizar.innerText="✅"
-finalizar.title="Finalizar setor"
 
 finalizar.onclick=()=>{
 
@@ -154,19 +118,14 @@ let texto=setor+"\n\n"
 for(let produto in dados[setor]){
 
 if(dados[setor][produto] > 0){
-
 texto+=produto+" - "+dados[setor][produto]+"\n"
-
 }
 
 }
 
 if(texto.trim()===setor){
-
 alert("Nenhum item nesse setor")
-
 return
-
 }
 
 navigator.clipboard.writeText(texto)
@@ -183,7 +142,9 @@ box.appendChild(header)
 
 /* produtos */
 
-for(let produto in dados[setor]){
+Object.keys(dados[setor])
+.sort((a,b)=>a.localeCompare(b))
+.forEach(produto=>{
 
 const linha=document.createElement("div")
 linha.className="produto"
@@ -196,16 +157,13 @@ input.type="number"
 input.value=dados[setor][produto] || ""
 
 input.oninput=()=>{
-
 dados[setor][produto]=input.value
 salvar()
-
 }
 
 /* botões quantidade */
 
 const botoes=document.createElement("div")
-botoes.className="qtdBtns"
 
 ;[1,5,10].forEach(valor=>{
 
@@ -216,7 +174,6 @@ b.innerText=valor
 b.onclick=()=>{
 
 let atual=parseInt(input.value)||0
-
 input.value=atual+valor
 
 dados[setor][produto]=input.value
@@ -229,31 +186,28 @@ botoes.appendChild(b)
 
 })
 
-/* limpar quantidade */
+/* limpar item */
 
-const limparItem=document.createElement("button")
-limparItem.innerText="🧹"
-limparItem.className="limparQtd"
+const limpar=document.createElement("button")
+limpar.innerText="🧹"
 
-limparItem.onclick=()=>{
-
+limpar.onclick=()=>{
 input.value=""
 dados[setor][produto]=""
 salvar()
-
 }
 
-/* excluir produto */
+/* excluir */
 
-const excluirItem=document.createElement("button")
-excluirItem.innerText="❌"
-excluirItem.className="excluirProduto"
+const excluir=document.createElement("button")
+excluir.innerText="❌"
 
-excluirItem.onclick=()=>{
+excluir.onclick=()=>{
 
 if(confirm("Excluir produto?")){
 
 delete dados[setor][produto]
+
 salvar()
 render()
 
@@ -264,20 +218,18 @@ render()
 linha.appendChild(nome)
 linha.appendChild(input)
 linha.appendChild(botoes)
-linha.appendChild(limparItem)
-linha.appendChild(excluirItem)
+linha.appendChild(limpar)
+linha.appendChild(excluir)
 
 box.appendChild(linha)
 
-}
+})
 
 /* adicionar produto */
 
 const add=document.createElement("button")
 
 add.innerText="+ Produto"
-
-add.className="addProduto"
 
 add.onclick=()=>{
 
@@ -301,3 +253,55 @@ container.appendChild(box)
 }
 
 render()
+
+/* EXPORTAR */
+
+document.getElementById("exportarBtn").onclick = ()=>{
+
+const backup = JSON.stringify(dados)
+
+const blob = new Blob([backup],{type:"application/json"})
+
+const url = URL.createObjectURL(blob)
+
+const a=document.createElement("a")
+
+a.href=url
+a.download="produtos-backup.json"
+
+a.click()
+
+URL.revokeObjectURL(url)
+
+}
+
+/* IMPORTAR */
+
+document.getElementById("importarBtn").onclick=()=>{
+
+document.getElementById("importarArquivo").click()
+
+}
+
+document.getElementById("importarArquivo").onchange=(e)=>{
+
+const file=e.target.files[0]
+
+if(!file) return
+
+const reader=new FileReader()
+
+reader.onload=(event)=>{
+
+dados=JSON.parse(event.target.result)
+
+salvar()
+render()
+
+alert("Produtos importados com sucesso")
+
+}
+
+reader.readAsText(file)
+
+}
