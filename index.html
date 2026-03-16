@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Pedidos</title>
 
 <link rel="stylesheet" href="style.css">
+
+<meta name="theme-color" content="#2e7d32">
 
 </head>
 
@@ -28,8 +32,21 @@
 
 <div id="setores"></div>
 
+
+<!-- barra backup -->
+
+<div id="backupBar">
+
+<button id="exportarDados">📤 Exportar</button>
+
+<button id="importarDados">📥 Importar</button>
+
+<input type="file" id="arquivoImportar" accept=".json" style="display:none">
+
+</div>
+
+
 <script src="script.js"></script>
 
 </body>
-
 </html>
