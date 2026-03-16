@@ -78,13 +78,14 @@ cursor:pointer;
 
 /* lixeira setor */
 
-.lixeira{
-background:#d9534f;
-color:white;
-border:none;
-padding:5px 8px;
-border-radius:5px;
-cursor:pointer;
+.lixeira {
+    background: #d9534f; /* botão vermelho */
+    color: white;         /* ícone branco */
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 /* produto */
