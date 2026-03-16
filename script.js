@@ -10,6 +10,8 @@ let dados = JSON.parse(localStorage.getItem("pedidos")) || {}
 
 let expandidos = {}
 
+let busca = ""
+
 setores.forEach(setor=>{
 if(!dados[setor]){
 dados[setor]={}
@@ -29,6 +31,13 @@ container.innerHTML=""
 
 setores.forEach(setor=>{
 
+let produtos = Object.keys(dados[setor]).filter(p =>
+p.toLowerCase().includes(busca) ||
+setor.toLowerCase().includes(busca)
+)
+
+if(produtos.length===0) return
+
 const box=document.createElement("div")
 box.className="setor"
 
@@ -37,6 +46,8 @@ header.className="setorHeader"
 
 const titulo=document.createElement("span")
 titulo.innerText=setor
+
+/* limpar setor */
 
 const limparSetor=document.createElement("button")
 limparSetor.innerText="🗑"
@@ -52,6 +63,8 @@ salvar()
 render()
 
 }
+
+/* finalizar setor */
 
 const finalizar=document.createElement("button")
 finalizar.innerText="✅"
@@ -87,7 +100,7 @@ header.appendChild(finalizar)
 
 box.appendChild(header)
 
-let produtos = Object.keys(dados[setor])
+/* limite itens */
 
 let limite = expandidos[setor] ? produtos.length : 5
 
@@ -108,6 +121,8 @@ input.oninput=()=>{
 dados[setor][produto]=input.value
 salvar()
 }
+
+/* botões quantidade */
 
 const botoes=document.createElement("div")
 botoes.className="qtdBtns"
@@ -133,6 +148,8 @@ botoes.appendChild(b)
 
 })
 
+/* limpar item */
+
 const limparItem=document.createElement("button")
 limparItem.innerText="🧹"
 limparItem.className="limparQtd"
@@ -141,9 +158,12 @@ limparItem.onclick=()=>{
 
 input.value=""
 dados[setor][produto]=""
+
 salvar()
 
 }
+
+/* excluir produto */
 
 const excluirItem=document.createElement("button")
 excluirItem.innerText="❌"
@@ -172,6 +192,8 @@ box.appendChild(linha)
 
 })
 
+/* botão expandir */
+
 if(produtos.length > 5){
 
 const expandir=document.createElement("button")
@@ -191,6 +213,8 @@ render()
 box.appendChild(expandir)
 
 }
+
+/* adicionar produto */
 
 const add=document.createElement("button")
 
@@ -215,6 +239,37 @@ box.appendChild(add)
 container.appendChild(box)
 
 })
+
+}
+
+/* botão busca */
+
+const btnBusca = document.getElementById("btnBusca")
+const campoBusca = document.getElementById("campoBusca")
+
+btnBusca.onclick = ()=>{
+
+if(campoBusca.style.display==="none" || campoBusca.style.display===""){
+
+campoBusca.style.display="block"
+campoBusca.focus()
+
+}else{
+
+campoBusca.style.display="none"
+campoBusca.value=""
+busca=""
+render()
+
+}
+
+}
+
+campoBusca.oninput=()=>{
+
+busca=campoBusca.value.toLowerCase()
+
+render()
 
 }
 
