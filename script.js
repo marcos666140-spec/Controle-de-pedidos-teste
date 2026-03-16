@@ -43,9 +43,7 @@ setor.toLowerCase().includes(busca)
 
 }
 
-/* se não tiver resultado não mostra setor */
-
-if(produtos.length === 0) return
+/* cria caixa setor */
 
 const box=document.createElement("div")
 box.className="setor"
