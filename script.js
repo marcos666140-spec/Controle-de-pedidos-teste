@@ -12,6 +12,8 @@ let expandidos = {}
 
 let busca = ""
 
+/* garante que todos setores existam */
+
 setores.forEach(setor=>{
 if(!dados[setor]){
 dados[setor]={}
@@ -26,6 +28,7 @@ localStorage.setItem("pedidos",JSON.stringify(dados))
 function render(){
 
 const container=document.getElementById("setores")
+
 container.innerHTML=""
 
 setores.forEach(setor=>{
@@ -43,7 +46,7 @@ setor.toLowerCase().includes(busca)
 
 }
 
-/* cria caixa setor */
+/* cria setor */
 
 const box=document.createElement("div")
 box.className="setor"
@@ -95,9 +98,9 @@ alert("Nenhum item nesse setor")
 return
 }
 
-navigator.clipboard.writeText(texto).then(()=>{
+navigator.clipboard.writeText(texto)
+
 alert("Pedido copiado:\n\n"+texto)
-})
 
 }
 
