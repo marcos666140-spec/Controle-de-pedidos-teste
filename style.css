@@ -181,3 +181,16 @@ header{
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
+.menuMover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  position: absolute;
+  z-index: 1000;
+}
+.menuMover div:hover {
+  background: #eee;
+  cursor: pointer;
+}
